@@ -119,13 +119,13 @@ $MENU_TOGGLE.on('click', function() {
 });
 
 	// check active menu
-	$SIDEBAR_MENU.find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
-
+	//$SIDEBAR_MENU.find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
+	console.log('CURRENTURL'+CURRENT_URL);
 	$SIDEBAR_MENU.find('a').filter(function () {
-		return this.href == CURRENT_URL;
-	}).parent('li').addClass('current-page').parents('ul').slideDown(function() {
+		return CURRENT_URL.indexOf(this.href)>-1;
+	}).parent('li').addClass('current-page').siblings().removeClass('current-page').parents('ul').slideDown(function() {
 		setContentHeight();
-	}).parent().addClass('active');
+	}).parent().addClass('active').siblings().removeClass('active');
 
 	// recompute content when resizing
 	$(window).smartresize(function(){  
@@ -5033,7 +5033,7 @@ if (typeof NProgress != 'undefined') {
 		init_DataTables();
 		init_chart_doughnut();
 		init_gauge();
-		init_PNotify();
+		//init_PNotify();
 		init_starrr();
 		init_calendar();
 		init_compose();
@@ -5043,4 +5043,3 @@ if (typeof NProgress != 'undefined') {
 				
 	});	
 	
-

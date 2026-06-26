@@ -59,7 +59,7 @@
 
                 <div>
                   <h1><i class="fa fa-paw"></i> Inventory Management System!</h1>
-                  <p>©2019 Inventory Management System. Privacy and Terms</p>
+                  <p> Inventory Management System. Privacy and Terms</p>
                 </div>
               </div>
             </form:form>

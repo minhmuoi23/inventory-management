@@ -1,0 +1,17 @@
+127.0.0.1 - - [20/Jun/2026:00:58:13 +0700] "GET / HTTP/1.1" 404 752
+0:0:0:0:0:0:0:1 - - [20/Jun/2026:00:58:27 +0700] "GET /inventory-management/index HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [20/Jun/2026:00:58:27 +0700] "GET /inventory-management/login HTTP/1.1" 200 2410
+0:0:0:0:0:0:0:1 - - [20/Jun/2026:00:59:34 +0700] "POST /inventory-management/processLogin HTTP/1.1" 200 2483
+0:0:0:0:0:0:0:1 - - [20/Jun/2026:00:59:37 +0700] "POST /inventory-management/processLogin HTTP/1.1" 200 2483
+0:0:0:0:0:0:0:1 - - [20/Jun/2026:01:01:06 +0700] "GET /inventory-management/index HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [20/Jun/2026:01:01:06 +0700] "GET /inventory-management/login HTTP/1.1" 200 2410
+0:0:0:0:0:0:0:1 - - [20/Jun/2026:01:02:02 +0700] "POST /inventory-management/processLogin HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [20/Jun/2026:01:02:03 +0700] "GET /inventory-management/index HTTP/1.1" 200 7560
+0:0:0:0:0:0:0:1 - - [20/Jun/2026:01:02:03 +0700] "GET /inventory-management/images/img.jpg HTTP/1.1" 404 683
+0:0:0:0:0:0:0:1 - - [20/Jun/2026:01:02:14 +0700] "GET /inventory-management/menu/list HTTP/1.1" 404 683
+0:0:0:0:0:0:0:1 - - [20/Jun/2026:01:02:18 +0700] "GET /inventory-management/category/list HTTP/1.1" 404 683
+0:0:0:0:0:0:0:1 - - [20/Jun/2026:01:02:22 +0700] "GET /inventory-management/index.html HTTP/1.1" 200 7560
+0:0:0:0:0:0:0:1 - - [20/Jun/2026:01:02:22 +0700] "GET /inventory-management/images/img.jpg HTTP/1.1" 404 683
+0:0:0:0:0:0:0:1 - - [20/Jun/2026:01:02:39 +0700] "GET /inventory-management/logout HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [20/Jun/2026:01:02:39 +0700] "GET /inventory-management/login HTTP/1.1" 200 2410
+0:0:0:0:0:0:0:1 - - [20/Jun/2026:01:03:17 +0700] "GET /inventory/product/list HTTP/1.1" 404 782

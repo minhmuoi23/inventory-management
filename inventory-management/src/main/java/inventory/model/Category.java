@@ -1,5 +1,5 @@
 package inventory.model;
-
+// Generated Dec 26, 2018 6:59:18 PM by Hibernate Tools 5.1.10.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -103,6 +103,10 @@ public class Category implements java.io.Serializable {
 
 	public void setProductInfos(Set productInfos) {
 		this.productInfos = productInfos;
+	}
+	@Override
+	public String toString() {
+		return "Name ="+name+" Code= "+code+" description="+description;
 	}
 
 }
