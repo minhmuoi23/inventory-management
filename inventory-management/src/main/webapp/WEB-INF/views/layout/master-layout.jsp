@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Inventory Management | </title>
+    <title>Quản lí kho hàng </title>
 
     <!-- Bootstrap -->
     <link href="<c:url value="/resources/vendors/bootstrap/dist/css/bootstrap.min.css"/>" rel="stylesheet">
@@ -24,10 +24,22 @@
 
     <!-- Custom Theme Style -->
     <link href="<c:url value="/resources/build/css/custom.min.css"/>" rel="stylesheet">
+    <style>
+  .nav_title, .left_col { background-color: #1a3a5c !important; }
+  .nav.side-menu > li > a { color: #cde0f5 !important; }
+  .nav.side-menu > li > a:hover { background-color: #1565c0 !important; color: #fff !important; }
+  .nav.side-menu > li.active > a { background-color: #1565c0 !important; border-left: 4px solid #64b5f6 !important; }
+  .nav.child_menu { background-color: #162f4a !important; }
+  .top_nav .nav_menu { background-color: #1e4d8c !important; }
+  .top_nav .nav_menu .nav > li > a { color: #cde0f5 !important; }
+  .jambo_table thead tr.headings th { background-color: #1e4d8c !important; color: #fff !important; }
+</style>
      <!-- PNotify -->
     <link href="<c:url value="/resources/vendors/pnotify/dist/pnotify.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/vendors/pnotify/dist/pnotify.buttons.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/vendors/pnotify/dist/pnotify.nonblock.css"/>" rel="stylesheet">
+        <!-- bootstrap-datetimepicker -->
+    <link href="<c:url value="/resources/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css"/>" rel="stylesheet">
       <!-- jQuery -->
     <script src="<c:url value="/resources/vendors/jquery/dist/jquery.min.js"/>"></script>
   </head>
@@ -38,7 +50,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Inventory Management!</span></a>
+              <a href="<c:url value='/index'/>" class="site_title"> <span>KHO HÀNG HNIM</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -49,7 +61,7 @@
                 <img src="<c:url value="/resources/images/user.png" />"alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
+                <span>Xin chào,</span>
                 <h2>${userInfo.name}</h2>
               </div>
             </div>
@@ -61,22 +73,7 @@
            	<tiles:insertAttribute name="sidebar"></tiles:insertAttribute>
             <!-- /sidebar menu -->
 
-            <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<c:url value='/logout'/>">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
-            <!-- /menu footer buttons -->
+            
           </div>
         </div>
 
@@ -107,7 +104,10 @@
     <script src="<c:url value="/resources/vendors/pnotify/dist/pnotify.js"/>"></script>
     <script src="<c:url value="/resources/vendors/pnotify/dist/pnotify.buttons.js"/>"></script>
     <script src="<c:url value="/resources/vendors/pnotify/dist/pnotify.nonblock.js"/>"></script>
-    
+    <!-- bootstrap-datetimepicker -->    
+    <!-- bootstrap-daterangepicker -->
+    <script src="<c:url value="/resources/vendors/moment/min/moment.min.js"/>"></script>
+    <script src="<c:url value="/resources/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"/>"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="<c:url value="/resources/build/js/custom.js"/>"></script>

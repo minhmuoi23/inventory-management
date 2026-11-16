@@ -11,5 +11,8 @@
    <Memento type="Queries"/>
    <Memento type="Filters"/>
   </Memento>
+  <Memento type="">
+   <Memento type="Properties Editor"/>
+  </Memento>
  </TreeFormPage>
 </Layout>

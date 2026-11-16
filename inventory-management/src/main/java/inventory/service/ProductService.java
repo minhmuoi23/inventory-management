@@ -15,9 +15,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import inventory.dao.CategoryDAO;
 import inventory.dao.ProductInfoDAO;
+import inventory.dao.SupplierDAO;
 import inventory.model.Category;
 import inventory.model.Paging;
 import inventory.model.ProductInfo;
+import inventory.model.Supplier;
 import inventory.util.ConfigLoader;
 
 @Service
@@ -26,6 +28,8 @@ public class ProductService {
 	private CategoryDAO<Category> categoryDAO;
 	@Autowired
 	private ProductInfoDAO<ProductInfo> productInfoDAO;
+	@Autowired
+	private SupplierDAO<Supplier> supplierDAO;
 	private static final Logger log = Logger.getLogger(ProductService.class);
 	public void saveCategory(Category category)  throws Exception{
 		log.info("Insert category "+category.toString());
@@ -74,7 +78,62 @@ public class ProductService {
 		log.info("find category by id ="+id);
 		return categoryDAO.findById(Category.class, id);
 	}
-	
+
+	// SUPPLIER
+
+	public void saveSupplier(Supplier supplier) throws Exception {
+		log.info("Insert supplier " + supplier.toString());
+		supplier.setActiveFlag(1);
+		supplier.setCreateDate(new Date());
+		supplier.setUpdateDate(new Date());
+		supplierDAO.save(supplier);
+	}
+
+	public void updateSupplier(Supplier supplier) throws Exception {
+		log.info("Update supplier " + supplier.toString());
+		supplier.setUpdateDate(new Date());
+		supplierDAO.update(supplier);
+	}
+
+	public void deleteSupplier(Supplier supplier) throws Exception {
+		supplier.setActiveFlag(0);
+		supplier.setUpdateDate(new Date());
+		log.info("Delete supplier " + supplier.toString());
+		supplierDAO.update(supplier);
+	}
+
+	public List<Supplier> findSupplier(String property, Object value) {
+		log.info("=====Find by property supplier start====");
+		log.info("property =" + property + " value" + value.toString());
+		return supplierDAO.findByProperty(property, value);
+	}
+
+	public List<Supplier> getAllSupplier(Supplier supplier, Paging paging) {
+		log.info("show all supplier");
+		StringBuilder queryStr = new StringBuilder();
+		Map<String, Object> mapParams = new HashMap<>();
+		if (supplier != null) {
+			if (supplier.getId() != null && supplier.getId() != 0) {
+				queryStr.append(" and model.id=:id");
+				mapParams.put("id", supplier.getId());
+			}
+			if (supplier.getCode() != null && !StringUtils.isEmpty(supplier.getCode())) {
+				queryStr.append(" and model.code=:code");
+				mapParams.put("code", supplier.getCode());
+			}
+			if (supplier.getName() != null && !StringUtils.isEmpty(supplier.getName())) {
+				queryStr.append(" and model.name like :name");
+				mapParams.put("name", "%" + supplier.getName() + "%");
+			}
+		}
+		return supplierDAO.findAll(queryStr.toString(), mapParams, paging);
+	}
+
+	public Supplier findByIdSupplier(int id) {
+		log.info("find supplier by id =" + id);
+		return supplierDAO.findById(Supplier.class, id);
+	}
+
 	// PRODUCT INFO
 	
 	public void saveProductInfo(ProductInfo productInfo)  throws Exception{
@@ -127,6 +186,14 @@ public class ProductService {
 			if(productInfo.getName()!=null && !StringUtils.isEmpty(productInfo.getName()) ) {
 				queryStr.append(" and model.name like :name");
 				mapParams.put("name", "%"+productInfo.getName()+"%");
+			}
+			if(productInfo.getSupplierId()!=null && productInfo.getSupplierId()!=0) {
+				queryStr.append(" and model.supplier.id=:supplierId");
+				mapParams.put("supplierId", productInfo.getSupplierId());
+			}
+			if(productInfo.getCateId()!=null && productInfo.getCateId()!=0) {
+				queryStr.append(" and model.category.id=:cateId");
+				mapParams.put("cateId", productInfo.getCateId());
 			}
 		}
 		return productInfoDAO.findAll(queryStr.toString(), mapParams,paging);

@@ -1,6 +1,7 @@
 package inventory.controller;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,12 +35,20 @@ public class HistoryController {
 		paging.setIndexPage(page);
 		List<History> histories = historyService.getAll(history, paging);
 		Map<String,String> mapType = new HashMap<>();
-		mapType.put(String.valueOf(Constant.TYPE_ALL), "All");
-		mapType.put(String.valueOf(Constant.TYPE_GOODS_RECEIPT), "Goods Receipt");
-		mapType.put(String.valueOf(Constant.TYPE_GOODS_ISSUES), "Goods Issues");
+		mapType.put(String.valueOf(Constant.TYPE_ALL), "Tất cả");
+		mapType.put(String.valueOf(Constant.TYPE_GOODS_RECEIPT), "Nhập kho");
+		mapType.put(String.valueOf(Constant.TYPE_GOODS_ISSUES), "Xuất kho");
+
+		Map<String,String> mapAction = new LinkedHashMap<>();
+		mapAction.put("", "Tất cả");
+		mapAction.put(Constant.ACTION_ADD, "Thêm");
+		mapAction.put(Constant.ACTION_EDIT, "Sửa");
+		mapAction.put(Constant.ACTION_DELETE, "Xóa");
+
 		model.addAttribute("histories", histories);
 		model.addAttribute("pageInfo", paging);
 		model.addAttribute("mapType", mapType);
+		model.addAttribute("mapAction", mapAction);
 		return "history";
 	}
 }

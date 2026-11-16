@@ -8,7 +8,7 @@
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<div class="x_panel">
 				<div class="x_title">
-					<h2>History List</h2>
+					<h2>Lịch Sử Kho</h2>
 
 					<div class="clearfix"></div>
 				</div>
@@ -16,27 +16,29 @@
 
 				<div class="x_content">
 					<div class="container" style="padding: 50px;">
-						<form:form modelAttribute="searchForm" cssClass="form-horizontal form-label-left" servletRelativeAction="/product-in-stock/list/1" method="POST">
+						<form:form modelAttribute="searchForm" cssClass="form-horizontal form-label-left" servletRelativeAction="/history/list/1" method="POST">
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Code </label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Mã sản phẩm </label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<form:input path="productInfo.code" cssClass="form-control col-md-7 col-xs-12" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Category</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Loại hàng</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<form:input path="productInfo.category.name" cssClass="form-control col-md-7 col-xs-12" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Action </label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Hành động </label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<form:input path="actionName" cssClass="form-control col-md-7 col-xs-12" />
+									<form:select path="actionName" cssClass="form-control">
+										<form:options items="${mapAction}" />
+									</form:select>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Type </label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Loại </label>
 
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<form:select path="type" cssClass="form-control">
@@ -48,7 +50,7 @@
 
 							<div class="form-group">
 								<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-									<button type="submit" class="btn btn-success">Search</button>
+									<button type="submit" class="btn btn-success">Tìm kiếm</button>
 								</div>
 							</div>
 
@@ -59,14 +61,14 @@
 						<table class="table table-striped jambo_table bulk_action">
 							<thead>
 								<tr class="headings">
-									<th class="column-title">#</th>
-									<th class="column-title">Category</th>
-									<th class="column-title">Code</th>
-									<th class="column-title">Name</th>
-									<th class="column-title">Qty</th>
-									<th class="column-title">Price</th>
-									<th class="column-title">Type</th>
-									<th class="column-title">Action</th>
+									<th class="column-title">STT</th>
+									<th class="column-title">Loại hàng</th>
+									<th class="column-title">Mã sản phẩm</th>
+									<th class="column-title">Tên sản phẩm</th>
+									<th class="column-title">Số lượng</th>
+									<th class="column-title">Đơn giá</th>
+									<th class="column-title">Loại</th>
+									<th class="column-title">Hành động</th>
 								</tr>
 							</thead>
 
@@ -89,13 +91,20 @@
 									<td class="">${history.price }</td>
 									<c:choose>
 										<c:when test="${history.type==1}">
-											<td>Goods Receipt</td>
+											<td>Nhập kho</td>
 										</c:when>
 										<c:otherwise>
-											<td>Goods Issues</td>
+											<td>Xuất kho</td>
 										</c:otherwise>
 									</c:choose>
-									<td>${histoy.actionName}</td>
+									<td>
+										<c:choose>
+											<c:when test="${history.actionName == 'Add'}">Thêm</c:when>
+											<c:when test="${history.actionName == 'Edit'}">Sửa</c:when>
+											<c:when test="${history.actionName == 'Delete'}">Xóa</c:when>
+											<c:otherwise>${history.actionName}</c:otherwise>
+										</c:choose>
+									</td>
 									</tr>
 								</c:forEach>
 
@@ -122,7 +131,7 @@
 		var msgError = '${msgError}';
 		if (msgSuccess) {
 			new PNotify({
-				title : ' Success',
+				title : ' Thành công',
 				text : msgSuccess,
 				type : 'success',
 				styling : 'bootstrap3'
@@ -130,7 +139,7 @@
 		}
 		if (msgError) {
 			new PNotify({
-				title : ' Error',
+				title : ' Lỗi',
 				text : msgError,
 				type : 'error',
 				styling : 'bootstrap3'

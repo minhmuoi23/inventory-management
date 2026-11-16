@@ -37,7 +37,7 @@ public class FilterSystem implements HandlerInterceptor{
 
 	}
 	private boolean hasPermission(String url , Users users) {
-		if(url.contains("/index") || url.contains("/access-denied") || url.contains("/logout")) {
+		if(url.contains("/index") || url.contains("/access-denied") || url.contains("/logout") || url.contains("/change-password")) {
 			return true;
 		}
 		UserRole userRole =(UserRole) users.getUserRoles().iterator().next();
@@ -45,7 +45,9 @@ public class FilterSystem implements HandlerInterceptor{
 		for(Object obj : auths) {
 			Auth auth = (Auth) obj;
 			if(url.contains(auth.getMenu().getUrl())) {
-				return auth.getPermission() ==1 ;
+				return auth.getPermission() == 1
+						&& auth.getMenu().getActiveFlag() == 1
+						&& auth.getActiveFlag() == 1;
 			}
 		}
 		return false;

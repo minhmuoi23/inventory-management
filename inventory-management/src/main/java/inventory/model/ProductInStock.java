@@ -17,6 +17,10 @@ public class ProductInStock implements java.io.Serializable {
 	private Date createDate;
 	private Date updateDate;
 
+	// Các trường này không map với DB, chỉ dùng để nhận tham số sắp xếp từ form tìm kiếm
+	private String sortBy;
+	private String sortDir;
+
 	public ProductInStock() {
 	}
 
@@ -82,6 +86,22 @@ public class ProductInStock implements java.io.Serializable {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+
+	public String getSortBy() {
+		return sortBy;
+	}
+
+	public void setSortBy(String sortBy) {
+		this.sortBy = sortBy;
+	}
+
+	public String getSortDir() {
+		return sortDir;
+	}
+
+	public void setSortDir(String sortDir) {
+		this.sortDir = sortDir;
 	}
 
 }

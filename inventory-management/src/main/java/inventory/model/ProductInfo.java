@@ -27,6 +27,8 @@ public class ProductInfo implements java.io.Serializable {
 	private Set invoices = new HashSet(0);
 	private MultipartFile multipartFile;
 	private Integer cateId;
+	private Supplier supplier;
+	private Integer supplierId;
 
 	public ProductInfo() {
 	}
@@ -169,6 +171,21 @@ public class ProductInfo implements java.io.Serializable {
 	public void setCateId(Integer cateId) {
 		this.cateId = cateId;
 	}
-	
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
+	public Integer getSupplierId() {
+		return supplierId;
+	}
+
+	public void setSupplierId(Integer supplierId) {
+		this.supplierId = supplierId;
+	}
 
 }

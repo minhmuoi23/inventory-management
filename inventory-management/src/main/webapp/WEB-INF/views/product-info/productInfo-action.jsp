@@ -22,7 +22,7 @@
 							<form:hidden path="imgUrl" />
 							<div class="form-group">
 
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="cateId">Category <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="cateId">Loại hàng <span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<c:choose>
@@ -44,7 +44,7 @@
 							</div>
 
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Code <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Mã sản phẩm <span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<form:input path="code" cssClass="form-control col-md-7 col-xs-12" disabled="${viewOnly}" />
@@ -54,7 +54,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Tên sản phẩm <span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<form:input path="name" cssClass="form-control col-md-7 col-xs-12" disabled="${viewOnly}" />
@@ -64,9 +64,28 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="description" class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="supplierId">Nhà cung cấp
+								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<form:textarea path="description" cssClass="form-control col-md-7 col-xs-12" disabled="${viewOnly}" />
+									<c:choose>
+										<c:when test="${!viewOnly}">
+											<form:select path="supplierId" cssClass="form-control">
+												<form:options items="${mapSupplier}" />
+											</form:select>
+											<div class="has-error">
+												<form:errors path="supplierId" cssClass="help-block"></form:errors>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<input type="text" class="form-control col-md-7 col-xs-12" value="${modelForm.supplier.name}" disabled="disabled"/>
+										</c:otherwise>
+									</c:choose>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="description" class="control-label col-md-3 col-sm-3 col-xs-12">Mô tả sản phẩm</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<form:textarea path="description" cssClass="form-control col-md-7 col-xs-12" disabled="${viewOnly}" rows="6" style="resize: vertical; min-height: 120px;" />
 									<div class="has-error">
 										<form:errors path="description" cssClass="help-block"></form:errors>
 									</div>
@@ -74,7 +93,7 @@
 							</div>
 							<c:if test="${!viewOnly }">
 								<div class="form-group">
-									<label for="multipartFile" class="control-label col-md-3 col-sm-3 col-xs-12">Image Upload</label>
+									<label for="multipartFile" class="control-label col-md-3 col-sm-3 col-xs-12">Tải ảnh lên</label>
 									<div class="col-md-6 col-sm-6 col-xs-12">
 										<form:input path="multipartFile" cssClass="form-control col-md-7 col-xs-12" type="file" />
 										<div class="has-error">
@@ -86,10 +105,10 @@
 							<div class="ln_solid"></div>
 							<div class="form-group">
 								<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-									<button class="btn btn-primary" type="button" onclick="cancel();">Cancel</button>
+									<button class="btn btn-primary" type="button" onclick="cancel();">Huỷ</button>
 									<c:if test="${!viewOnly }">
-										<button class="btn btn-primary" type="reset">Reset</button>
-										<button type="submit" class="btn btn-success">Submit</button>
+										<button class="btn btn-primary" type="reset">Đặt lại</button>
+										<button type="submit" class="btn btn-success">Tạo</button>
 									</c:if>
 								</div>
 							</div>

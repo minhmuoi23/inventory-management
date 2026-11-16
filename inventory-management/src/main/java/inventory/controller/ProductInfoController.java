@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import inventory.model.ProductInfo;
 import inventory.model.Category;
+import inventory.model.Supplier;
 import inventory.model.Paging;
 import inventory.service.ProductService;
 import inventory.util.Constant;
@@ -71,20 +72,24 @@ public class ProductInfoController {
 		}
 		model.addAttribute("pageInfo", paging);
 		model.addAttribute("products", products);
+		model.addAttribute("mapSupplier", buildMapSupplier(true, "-- Tất cả --"));
+		model.addAttribute("mapCategory", buildMapCategory(true, "-- Tất cả --"));
 		return "productInfo-list";
 		
 	}
 	@GetMapping("/product-info/add")
 	public String add(Model model) {
-		model.addAttribute("titlePage", "Add ProductInfo");
-		model.addAttribute("modelForm", new ProductInfo());
+		model.addAttribute("titlePage", "Thêm sản phẩm");
+		ProductInfo newProductInfo = new ProductInfo();
+		newProductInfo.setSupplierId(0);
+		model.addAttribute("modelForm", newProductInfo);
 		List<Category> categories = productService.getAllCategory(null, null);
 		Map<String, String> mapCategory = new HashMap<>();
 		for(Category category : categories) {
 			mapCategory.put(String.valueOf(category.getId()), category.getName());
 		}
 		model.addAttribute("mapCategory", mapCategory);
-		model.addAttribute("mapCategory", mapCategory);
+		model.addAttribute("mapSupplier", buildMapSupplier(true));
 		model.addAttribute("viewOnly", false);
 		return "productInfo-action";
 	}
@@ -99,8 +104,14 @@ public class ProductInfoController {
 				mapCategory.put(String.valueOf(category.getId()), category.getName());
 			}
 			productInfo.setCateId(productInfo.getCategory().getId());
+			if(productInfo.getSupplier()!=null) {
+				productInfo.setSupplierId(productInfo.getSupplier().getId());
+			} else {
+				productInfo.setSupplierId(0);
+			}
 			model.addAttribute("mapCategory", mapCategory);
-			model.addAttribute("titlePage", "Edit ProductInfo");
+			model.addAttribute("mapSupplier", buildMapSupplier(true));
+			model.addAttribute("titlePage", "Sửa sản phẩm");
 			model.addAttribute("modelForm", productInfo);
 			model.addAttribute("viewOnly", false);
 			return "productInfo-action";
@@ -112,7 +123,7 @@ public class ProductInfoController {
 		log.info("View productInfo with id="+id);
 		ProductInfo productInfo = productService.findByIdProductInfo(id);
 		if(productInfo!=null) {
-			model.addAttribute("titlePage", "View ProductInfo");
+			model.addAttribute("titlePage", "Xem sản phẩm");
 			model.addAttribute("modelForm", productInfo);
 			model.addAttribute("viewOnly", true);
 			return "productInfo-action";
@@ -123,9 +134,9 @@ public class ProductInfoController {
 	public String save(Model model,@ModelAttribute("modelForm") @Validated ProductInfo productInfo,BindingResult result,HttpSession session) {
 		if(result.hasErrors()) {
 			if(productInfo.getId()!=null) {
-				model.addAttribute("titlePage", "Edit ProductInfo");
+				model.addAttribute("titlePage", "Sửa sản phẩm");
 			}else {
-				model.addAttribute("titlePage", "Add ProductInfo");
+				model.addAttribute("titlePage", "Thêm sản phẩm");
 			}
 			List<Category> categories = productService.getAllCategory(null, null);
 			Map<String, String> mapCategory = new HashMap<>();
@@ -133,6 +144,7 @@ public class ProductInfoController {
 				mapCategory.put(String.valueOf(category.getId()), category.getName());
 			}
 			model.addAttribute("mapCategory", mapCategory);
+			model.addAttribute("mapSupplier", buildMapSupplier(true));
 			model.addAttribute("modelForm", productInfo);
 			model.addAttribute("viewOnly", false);
 			return "productInfo-action";
@@ -141,26 +153,33 @@ public class ProductInfoController {
 		Category category = new Category();
 		category.setId(productInfo.getCateId());
 		productInfo.setCategory(category);
+		if(productInfo.getSupplierId()!=null && productInfo.getSupplierId()!=0) {
+			Supplier supplier = new Supplier();
+			supplier.setId(productInfo.getSupplierId());
+			productInfo.setSupplier(supplier);
+		} else {
+			productInfo.setSupplier(null);
+		}
 		if(productInfo.getId()!=null && productInfo.getId()!=0) {
 			try {
 				
 				productService.updateProductInfo(productInfo);
-				session.setAttribute(Constant.MSG_SUCCESS, "Update success!!!");
+				session.setAttribute(Constant.MSG_SUCCESS, "Cập nhật thành công!!!");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				log.error(e.getMessage());
-				session.setAttribute(Constant.MSG_ERROR, "Update has error");
+				session.setAttribute(Constant.MSG_ERROR, "Cập nhật thất bại");
 			}
 			
 		}else {
 				try {
 					productService.saveProductInfo(productInfo);
-					session.setAttribute(Constant.MSG_SUCCESS, "Insert success!!!");
+					session.setAttribute(Constant.MSG_SUCCESS, "Thêm mới thành công!!!");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					session.setAttribute(Constant.MSG_ERROR, "Insert has error!!!");
+					session.setAttribute(Constant.MSG_ERROR, "Thêm mới thất bại!!!");
 				}
 		}
 		return "redirect:/product-info/list";
@@ -173,14 +192,42 @@ public class ProductInfoController {
 		if(productInfo!=null) {
 			try {
 				productService.deleteProductInfo(productInfo);
-				session.setAttribute(Constant.MSG_SUCCESS, "Delete success!!!");
+				session.setAttribute(Constant.MSG_SUCCESS, "Xoá thành công!!!");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				session.setAttribute(Constant.MSG_ERROR, "Delete has error!!!");
+				session.setAttribute(Constant.MSG_ERROR, "Xoá thất bại!!!");
 			}
 		}
 		return "redirect:/product-info/list";
 	}
-	
+
+	private Map<String, String> buildMapCategory(boolean includeBlankOption, String blankLabel) {
+		List<Category> categories = productService.getAllCategory(null, null);
+		Map<String, String> mapCategory = new HashMap<>();
+		if (includeBlankOption) {
+			mapCategory.put("0", blankLabel);
+		}
+		for (Category category : categories) {
+			mapCategory.put(String.valueOf(category.getId()), category.getName());
+		}
+		return mapCategory;
+	}
+
+	private Map<String, String> buildMapSupplier(boolean includeBlankOption) {
+		return buildMapSupplier(includeBlankOption, "-- Không chọn --");
+	}
+
+	private Map<String, String> buildMapSupplier(boolean includeBlankOption, String blankLabel) {
+		List<Supplier> suppliers = productService.getAllSupplier(null, null);
+		Map<String, String> mapSupplier = new HashMap<>();
+		if (includeBlankOption) {
+			mapSupplier.put("0", blankLabel);
+		}
+		for (Supplier supplier : suppliers) {
+			mapSupplier.put(String.valueOf(supplier.getId()), supplier.getName());
+		}
+		return mapSupplier;
+	}
+
 }

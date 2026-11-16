@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
  <footer>
           <div class="pull-right">
-           Inventory Management - Đồ án
+           Quản lí kho hàng điện tử - Đồ án
           </div>
           <div class="clearfix"></div>
         </footer>

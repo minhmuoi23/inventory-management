@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Inventory Management | </title>
+    <title>Quản lí kho hàng | </title>
 
     <!-- Bootstrap -->
     <link href="<c:url value="/resources/vendors/bootstrap/dist/css/bootstrap.min.css"/>" rel="stylesheet">
@@ -32,8 +32,8 @@
           <div class="col-middle">
             <div class="text-center text-center">
               <h1 class="error-number">403</h1>
-              <h2>Access denied</h2>
-              <p>Full authentication is required to access this resource. <a href="#">Report this?</a>
+              <h2>Không thể truy cập</h2>
+              <p>Không có quyền truy cập. <a href="#">Báo cáo?</a>
               </p>
        
             </div>

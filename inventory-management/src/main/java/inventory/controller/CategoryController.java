@@ -53,7 +53,7 @@ public class CategoryController {
 	
 	@RequestMapping(value="/category/list/{page}")
 	public String showCategoryList(Model model,HttpSession session , @ModelAttribute("searchForm") Category category,@PathVariable("page") int page) {
-		Paging paging = new Paging(1);
+		Paging paging = new Paging(5);
 		paging.setIndexPage(page);
 		List<Category> categories = productService.getAllCategory(category,paging);
 		if(session.getAttribute(Constant.MSG_SUCCESS)!=null ) {
@@ -71,7 +71,7 @@ public class CategoryController {
 	}
 	@GetMapping("/category/add")
 	public String add(Model model) {
-		model.addAttribute("titlePage", "Add Category");
+		model.addAttribute("titlePage", "Thêm loại hàng");
 		model.addAttribute("modelForm", new Category());
 		model.addAttribute("viewOnly", false);
 		return "category-action";
@@ -81,7 +81,7 @@ public class CategoryController {
 		log.info("Edit category with id="+id);
 		Category category = productService.findByIdCategory(id);
 		if(category!=null) {
-			model.addAttribute("titlePage", "Edit Category");
+			model.addAttribute("titlePage", "Sửa loại hàng");
 			model.addAttribute("modelForm", category);
 			model.addAttribute("viewOnly", false);
 			return "category-action";
@@ -93,7 +93,7 @@ public class CategoryController {
 		log.info("View category with id="+id);
 		Category category = productService.findByIdCategory(id);
 		if(category!=null) {
-			model.addAttribute("titlePage", "View Category");
+			model.addAttribute("titlePage", "Xem loại hàng");
 			model.addAttribute("modelForm", category);
 			model.addAttribute("viewOnly", true);
 			return "category-action";
@@ -104,9 +104,9 @@ public class CategoryController {
 	public String save(Model model,@ModelAttribute("modelForm") @Validated Category category,BindingResult result,HttpSession session) {
 		if(result.hasErrors()) {
 			if(category.getId()!=null) {
-				model.addAttribute("titlePage", "Edit Category");
+				model.addAttribute("titlePage", "Sửa loại hàng");
 			}else {
-				model.addAttribute("titlePage", "Add Category");
+				model.addAttribute("titlePage", "Thêm loại hàng");
 			}
 			
 			model.addAttribute("modelForm", category);
@@ -117,22 +117,22 @@ public class CategoryController {
 		if(category.getId()!=null && category.getId()!=0) {
 			try {
 				productService.updateCategory(category);
-				session.setAttribute(Constant.MSG_SUCCESS, "Update success!!!");
+				session.setAttribute(Constant.MSG_SUCCESS, "Cập nhật thành công!!!");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				log.error(e.getMessage());
-				session.setAttribute(Constant.MSG_ERROR, "Update has error");
+				session.setAttribute(Constant.MSG_ERROR, "Cập nhật thất bại");
 			}
 			
 		}else {
 				try {
 					productService.saveCategory(category);
-					session.setAttribute(Constant.MSG_SUCCESS, "Insert success!!!");
+					session.setAttribute(Constant.MSG_SUCCESS, "Thêm mới thành công!!!");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					session.setAttribute(Constant.MSG_ERROR, "Insert has error!!!");
+					session.setAttribute(Constant.MSG_ERROR, "Thêm mới thất bại!!!");
 				}
 		}
 		return "redirect:/category/list";
@@ -145,11 +145,11 @@ public class CategoryController {
 		if(category!=null) {
 			try {
 				productService.deleteCategory(category);
-				session.setAttribute(Constant.MSG_SUCCESS, "Delete success!!!");
+				session.setAttribute(Constant.MSG_SUCCESS, "Xoá thành công!!!");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				session.setAttribute(Constant.MSG_ERROR, "Delete has error!!!");
+				session.setAttribute(Constant.MSG_ERROR, "Xoá thất bại!!!");
 			}
 		}
 		return "redirect:/category/list";

@@ -8,8 +8,9 @@ public class Constant {
 	public static final Integer TYPE_GOODS_RECEIPT = 1;
 	public static final Integer TYPE_GOODS_ISSUES = 2;
 	public static final Integer TYPE_ALL = 0;
-	public static final String ACTION_ADD = "Add";
-	public static final String ACTION_EDIT = "Edit";
-	public static final String ACTION_DELETE = "Delete";
-	
+	public static final String ACTION_ADD = "Thêm";
+	public static final String ACTION_EDIT = "Sửa";
+	public static final String ACTION_DELETE = "Xóa";
+	public static final String KEY_GOODS_RECEIPT_REPORT="key_goods_receipt";
+
 }

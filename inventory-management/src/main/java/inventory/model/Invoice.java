@@ -1,5 +1,5 @@
 package inventory.model;
-
+// Generated Dec 26, 2018 6:59:18 PM by Hibernate Tools 5.1.10.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -18,6 +18,11 @@ public class Invoice implements java.io.Serializable {
 	private int activeFlag;
 	private Date createDate;
 	private Date updateDate;
+	private Date toDate;
+	private Date fromDate;
+	private Integer productId;
+	private Users createdBy;
+	private Integer createdById;
 
 	public Invoice() {
 	}
@@ -104,6 +109,46 @@ public class Invoice implements java.io.Serializable {
 
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
+	}
+
+	public Date getToDate() {
+		return toDate;
+	}
+
+	public void setToDate(Date toDate) {
+		this.toDate = toDate;
+	}
+
+	public Date getFromDate() {
+		return fromDate;
+	}
+
+	public void setFromDate(Date fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+
+	public Users getCreatedBy() {
+		return this.createdBy;
+	}
+
+	public void setCreatedBy(Users createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Integer getCreatedById() {
+		return this.createdById;
+	}
+
+	public void setCreatedById(Integer createdById) {
+		this.createdById = createdById;
 	}
 
 }

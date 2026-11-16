@@ -3,7 +3,7 @@
 <%@page language="java" pageEncoding="UTF-8" %>
 <%@page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Inventory Management | </title>
+    <title>Quản Lý Kho Hàng | </title>
 
     <!-- Bootstrap -->
     <link href="<c:url value="/resources/vendors/bootstrap/dist/css/bootstrap.min.css"/>" rel="stylesheet">
@@ -33,21 +33,21 @@
         <div class="animate form login_form">
           <section class="login_content">
             <form:form modelAttribute="loginForm" servletRelativeAction="/processLogin" method="POST" >
-              <h1>Login Form</h1>
+              <h1>Đăng Nhập</h1>
               <div>
-                <form:input path="userName" cssClass="form-control" placeholder="Username"/>
+                <form:input path="userName" cssClass="form-control" placeholder="Tên đăng nhập"/>
                 <div class="has-error">
                 	<form:errors path="userName" cssClass="help-block"></form:errors>
                 </div>
               </div>
               <div>
-                <form:password path="password" cssClass="form-control" placeholder="Password" />
+                <form:password path="password" cssClass="form-control" placeholder="Mật khẩu" />
                 <div class="has-error">
                 	<form:errors path="password" cssClass="help-block"></form:errors>
                 </div>
               </div>
               <div>
-                <button class="btn btn-default submit" type="submit">Log in</button>
+                <button class="btn btn-default submit" type="submit">Đăng nhập</button>
               </div>
 
               <div class="clearfix"></div>
@@ -58,8 +58,8 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-paw"></i> Inventory Management System!</h1>
-                  <p> Inventory Management System. Privacy and Terms</p>
+                  <h1><i class="fa fa-paw"></i> Hệ Thống Quản Lý Kho Hàng!</h1>
+                  <p> Hệ thống quản lý kho hàng. Quyền riêng tư và Điều khoản</p>
                 </div>
               </div>
             </form:form>

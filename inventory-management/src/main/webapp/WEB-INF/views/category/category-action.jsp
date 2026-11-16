@@ -20,7 +20,7 @@
 							<form:hidden path="createDate" />
 							<form:hidden path="activeFlag" />
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Code <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Mã hàng <span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<form:input path="code" cssClass="form-control col-md-7 col-xs-12" disabled="${viewOnly}" />
@@ -30,7 +30,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Loại hàng <span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<form:input path="name" cssClass="form-control col-md-7 col-xs-12" disabled="${viewOnly}" />
@@ -40,7 +40,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="description" class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
+								<label for="description" class="control-label col-md-3 col-sm-3 col-xs-12">Mô tả</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<form:input path="description" cssClass="form-control col-md-7 col-xs-12" disabled="${viewOnly}" />
 									<div class="has-error">
@@ -51,10 +51,10 @@
 							<div class="ln_solid"></div>
 							<div class="form-group">
 								<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-									<button class="btn btn-primary" type="button" onclick="cancel();">Cancel</button>
+									<button class="btn btn-primary" type="button" onclick="cancel();">Huỷ</button>
 									<c:if test="${!viewOnly }">
-										<button class="btn btn-primary" type="reset">Reset</button>
-										<button type="submit" class="btn btn-success">Submit</button>
+										<button class="btn btn-primary" type="reset">Đặt lại</button>
+										<button type="submit" class="btn btn-success">Tạo</button>
 									</c:if>
 								</div>
 							</div>
